@@ -1,8 +1,13 @@
 package learn.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class DemoController {
@@ -12,4 +17,18 @@ public class DemoController {
     public String Hello() {
         return message;
     }
+
+    @Autowired
+    EmployeeList employeeList;
+    @PostMapping("/AddEmployee")
+    public EmployeeModel addEmp( @RequestBody EmployeeModel emp) {
+        employeeList.addEmp(emp);
+        return emp;
+    }
+
+    @GetMapping("/GetEmployee")
+    public List<EmployeeModel> getEmployee() {
+        return employeeList.getEmployeeList();
+    }
+
 }
