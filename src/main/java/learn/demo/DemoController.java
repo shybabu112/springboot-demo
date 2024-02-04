@@ -20,15 +20,18 @@ public class DemoController {
 
     @Autowired
     EmployeeList employeeList;
-    @PostMapping("/AddEmployee")
+
+    @Autowired
+    UserRepository repository;
+    @PostMapping("/add")
     public EmployeeModel addEmp( @RequestBody EmployeeModel emp) {
-        employeeList.addEmp(emp);
+        repository.save(emp);
         return emp;
     }
 
-    @GetMapping("/GetEmployee")
+    @GetMapping("/get")
     public List<EmployeeModel> getEmployee() {
-        return employeeList.getEmployeeList();
+        return repository.findAll();
     }
 
 }

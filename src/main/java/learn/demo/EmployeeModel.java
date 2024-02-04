@@ -1,8 +1,11 @@
 package learn.demo;
 
-import org.springframework.stereotype.Component;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "Users")
 public class EmployeeModel {
+   @Id
     int id;
     String name;
     String add;
